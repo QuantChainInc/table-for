@@ -26,7 +26,11 @@
 
 <%# Define a header block for each column, named using that column's name with the word "_header" appended to it %>
 <% table.define lambda {|column| "#{column.name}_header" }, :collection => table.columns do |column, options| %>
-  <%= table.header_cell_content(column, options) %>
+  <% if options[:checkbox_header] %>
+    <%= check_box_tag(options[:checkbox_header_name] || 'checkbox_header', '') %>
+  <% else %>
+    <%= table.header_cell_content(column, options) %>
+  <% end %>
 <% end %>
 
 <% table.define :body do |options| %>
